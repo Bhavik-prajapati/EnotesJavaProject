@@ -44,11 +44,11 @@ public class UserDAO {
 		
 	}
 	
-	public boolean loginUser(UserDetails us) {
+	public UserDetails loginUser(UserDetails us) {
 		
 		
-		boolean f=false;
 		
+		UserDetails user=null;
 		
 		try {
 			
@@ -60,7 +60,13 @@ public class UserDAO {
 			
 			if(rs.next()) {
 				
-				f=true;
+				user=new UserDetails();
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
+				
+				
 				
 			}
 			
@@ -68,7 +74,10 @@ public class UserDAO {
 			
 			e.printStackTrace();
 		}
-		return f;
+		
+		
+		return user;
+		
 		
 		}
 	
